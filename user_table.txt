@@ -1,0 +1,31 @@
+
+CREATE TABLE users(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    address VARCHAR(255),
+    phone VARCHAR(20)
+);
+
+--Input Validation and Prepared Statements Example
+DECLARE @input_name VARCHAR(100);
+DECLARE @input_address VARCHAR(255);
+DECLARE @input_phone VARCHAR(20);
+
+--User - provided input(replace with actual user input)
+SET @input_name = 'Hira Datta Dhakal';
+SET @input_address = 'Parrmatta St, Sydney';
+SET @input_phone = '123-456-7890';
+
+--a) Input Validation and Disallow Special Characters
+IF @input_name NOT LIKE '%[^a-zA-Z0-9 ]%' AND
+@input_address NOT LIKE '%[^a-zA-Z0-9, ]%' AND
+@input_phone NOT LIKE '%[^0-9-]%' THEN
+
+--b) Prepared Statement with Parameterized Inputs
+    PREPARE stmt_insert_user FROM 'INSERT INTO users (name, address, phone) VALUES (?, ?, ?)';
+    EXECUTE stmt_insert_user USING @input_name, @input_address, @input_phone;
+    DEALLOCATE PREPARE stmt_insert_user;
+
+ELSE
+    SELECT 'Invalid input. Special characters are not allowed.';
+END IF;
