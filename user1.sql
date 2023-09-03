@@ -39,4 +39,4 @@ CREATE TABLE user_profile (
 SELECT * FROM users WHERE username = 'user_typed_username' AND password = 'user_typed_password';
 
 OR '1'='1'
-SELECT * FROM users WHERE username = 'user_typed_username' OR '1'='1' AND password = 'user_typed_password';
+SELECT * FROM users WHERE username = 'user_typed_username' AND password = 'user_typed_password' OR '1'='1';

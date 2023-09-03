@@ -1,12 +1,15 @@
 import sqlite3 as mysql
 
+username = input("Please Provide your username:")
+password= input("please Provide your password:")
+
 # Get user input (simulated as user-entered data)
-input_username = "user123"
-input_password = "' OR '1'='1"
+user_typed_username = username
+user_typed_password = password
 database = "test_databse.db"
 
-# Construct a SQL query (unsafe)
-query = f"SELECT * FROM users WHERE username = '{input_username}' AND password = '{input_password}'"
+# Construct a SQL query
+query = f"SELECT * FROM user WHERE username = '{user_typed_username}' AND password = '{user_typed_password}' OR '1'='1'"
 
 # Connect to the database and execute the query
 conn = mysql.connect(database)
